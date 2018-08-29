@@ -1,6 +1,7 @@
 package org.dimazay.selenium.grid.hub.controlpanel.business.service;
 
 import org.dimazay.selenium.grid.hub.controlpanel.business.models.DeviceInfo;
+import org.dimazay.selenium.grid.hub.deviceavailability.DeviceAvailability;
 import org.dimazay.selenium.grid.hub.deviceavailability.models.BrowserData;
 import org.dimazay.selenium.grid.hub.deviceavailability.models.DeviceData;
 import org.openqa.grid.internal.*;
@@ -9,6 +10,8 @@ import org.openqa.selenium.remote.CapabilityType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by Dmytro_Zaitsev on 8/9/2017.
@@ -30,8 +33,8 @@ public class DeviceInfoService {
             for(TestSlot testSlot : proxy.getTestSlots()){
                 Map<String, Object> testSlotCapabilities = testSlot.getCapabilities();
                 DeviceInfo deviceInfo = new DeviceInfo();
-                String browserName =  testSlotCapabilities.get(CapabilityType.BROWSER_NAME).toString();
-                String deviceName = testSlotCapabilities.containsKey(DEVICE_NAME_CAPABILITY) ? testSlotCapabilities.get(DEVICE_NAME_CAPABILITY).toString() : null;
+                String browserName =  testSlotCapabilities.containsKey(CapabilityType.BROWSER_NAME) ? testSlotCapabilities.get(CapabilityType.BROWSER_NAME).toString() : "";
+                String deviceName = testSlotCapabilities.containsKey(DEVICE_NAME_CAPABILITY) ? testSlotCapabilities.get(DEVICE_NAME_CAPABILITY).toString() : "";
 
                 deviceInfo.setBrowserName(browserName);
                 deviceInfo.setName(deviceName);
